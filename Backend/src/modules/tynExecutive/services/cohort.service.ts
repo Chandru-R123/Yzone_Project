@@ -1,5 +1,5 @@
 import CohortRepository from "../repositories/cohort.repo";
-import { Cohort } from "../../../types/cohort.types";
+import { Cohort } from "../types/cohort.types";
 
 class CohortService {
 

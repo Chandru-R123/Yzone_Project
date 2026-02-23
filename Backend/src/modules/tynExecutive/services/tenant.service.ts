@@ -1,5 +1,5 @@
 import TenantRepository from "../repositories/tenant.repo";
-import { Tenant } from "../../../types/tenant.types";
+import { Tenant } from "../types/tenant.types";
 
 class TenantService {
 

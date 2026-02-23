@@ -1,10 +1,10 @@
 import express from "express";
-import executiveRoutes from "./modules/tynExecutive/routes/executive.routes";
-
+import facilitatorRoutes from "./modules/facilitator/routes/facilitator.routes";
 const app = express();
 
 app.use(express.json());
 
-app.use("/api/executive", executiveRoutes);
+// Base path for facilitator
+app.use("/api/facilitator", facilitatorRoutes);
 
 export default app;

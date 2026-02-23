@@ -1,4 +1,4 @@
-import { Tenant } from "../../../types/tenant.types";
+import { Tenant } from "../types/tenant.types";
 import pool from "../../../config/db";
 
 class TenantRepository {

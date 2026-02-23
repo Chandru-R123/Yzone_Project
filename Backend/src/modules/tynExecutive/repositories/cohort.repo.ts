@@ -1,5 +1,5 @@
 import pool from "../../../config/db";
-import { Cohort } from "../../../types/cohort.types";
+import { Cohort } from "../types/cohort.types";
 
 class CohortRepository {
 
