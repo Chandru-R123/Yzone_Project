@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 import { Tenant } from "../types/tenant.types";
 import pool from "../../../config/db";
+=======
+import { Tenant } from "../../../types/tenant.types";
+import { pool }from "../../../config/db";
+>>>>>>> 344fe00 (hello)
 
 class TenantRepository {
 

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 node_modules/
 dist/
 .env
@@ -7,4 +8,11 @@ dist/
 .idea/
 coverage/
 *.tsbuildinfo
+=======
+node_modules/
+dist/
+.env
+.vscode/
+*.log
+>>>>>>> 344fe00 (hello)
 *.json

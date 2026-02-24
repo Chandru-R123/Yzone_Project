@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 import pool from "../../../config/db";
 import { Cohort } from "../types/cohort.types";
+=======
+import{ pool } from "../../../config/db";
+import { Cohort } from "../../../types/cohort.types";
+>>>>>>> 344fe00 (hello)
 
 class CohortRepository {
 
