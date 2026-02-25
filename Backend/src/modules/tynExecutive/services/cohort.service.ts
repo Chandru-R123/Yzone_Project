@@ -1,3 +1,4 @@
+// src/modules/tynExecutive/services/cohort.service.ts
 import CohortRepository from "../repositories/cohort.repo";
 import { Cohort } from "../types/cohort.types";
 
@@ -7,7 +8,7 @@ class CohortService {
     return await CohortRepository.create(data);
   }
 
-  static async getCohortsByTenant(tenantId: number) {
+  static async getCohortsByTenant(tenantId: string) {
     return await CohortRepository.getByTenant(tenantId);
   }
 }

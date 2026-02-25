@@ -1,8 +1,8 @@
+// src/modules/tynExecutive/types/cohort.types.ts
 export interface Cohort {
-  id: number;
-  tenantId: number;
+  tenantId: string;      // UUID string
   name: string;
-  startDate: Date;
-  endDate: Date;
-  status: "PLANNED" | "ACTIVE" | "COMPLETED";
+  startDate?: string;    // ISO date string
+  endDate?: string;      // ISO date string
+  status?: string;       // e.g., "ONGOING", "COMPLETED"
 }

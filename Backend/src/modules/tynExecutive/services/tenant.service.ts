@@ -1,18 +1,27 @@
 import TenantRepository from "../repositories/tenant.repo";
-import { Tenant } from "../types/tenant.types";
+
+interface TenantInput {
+  college_name: string;
+  principal_name: string;
+  email: string;
+  phone?: string;
+  address?: string;
+  status?: string;
+}
 
 class TenantService {
 
-  static async getTenants(): Promise<Tenant[]> {
-    return await TenantRepository.getAll();
+  static async createTenant(data: TenantInput) {
+    // You could add extra validation here if needed
+    return TenantRepository.createTenant(data);
   }
 
-  static async getTenant(id: string): Promise<Tenant | null> {
-    return await TenantRepository.getById(id);
+  static async getTenant(id: string) {
+    return TenantRepository.getTenant(id);
   }
 
-  static async createTenant(data: Tenant): Promise<Tenant> {
-    return await TenantRepository.create(data);
+  static async getTenants() {
+    return TenantRepository.getTenants();
   }
 }
 
