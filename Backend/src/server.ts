@@ -7,15 +7,15 @@ dotenv.config();
 const PORT: number = Number(process.env.PORT) || 5000;
 
 // Start server only after DB connects
-pool.connect()
-  .then(() => {
+async function startServer() {
+  try {
+    await pool.connect();
     console.log("✅ Database connected successfully");
 
     app.listen(PORT, () => {
       console.log(`🚀 Server running on port ${PORT}`);
     });
-  })
-  .catch((error: unknown) => {
+  } catch (error: unknown) {
     if (error instanceof Error) {
       console.error("❌ Database connection failed:", error.message);
     } else {
@@ -23,4 +23,7 @@ pool.connect()
     }
 
     process.exit(1);
-  });
+  }
+}
+
+startServer();

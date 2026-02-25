@@ -26,18 +26,20 @@ const runSQLFile = async (filePath: string) => {
 
 (async () => {
   try {
-    const facilitatorSchemaPath = path.join(
-      __dirname,
-      "../modules/facilitator/facilitator.schema.sql"
-    );
+    const schemas = [
+      "../modules/facilitator/facilitator.schema.sql",
+      "../modules/tynExecutive/tynExecutive.schema.sql",
+      "../modules/facultyPrincipal/facultyPrincipal.schema.sql",
+      "../modules/industryMentor/industryMentor.schema.sql",
+      "../modules/student/student.schema.sql" // optional
+    ];
 
-    const executiveSchemaPath = path.join(
-      __dirname,
-      "../modules/tynExecutive/tynExecutive.schema.sql"
-    );
+    for (const schemaPath of schemas) {
+      const fullPath = path.join(__dirname, schemaPath);
+      await runSQLFile(fullPath);
+    }
 
-    await runSQLFile(facilitatorSchemaPath);
-    await runSQLFile(executiveSchemaPath);
+    console.log("All schemas initialized successfully");
 
   } catch (error) {
     console.error("Error initializing schemas:", error);
