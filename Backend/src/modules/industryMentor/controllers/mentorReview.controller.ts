@@ -5,54 +5,32 @@ class MentorReviewController {
 
   static async create(req: Request, res: Response) {
     try {
-      const review = await MentorReviewService.createReview(req.body);
-
-      res.status(201).json({
-        success: true,
-        data: review,
-      });
-
-    } catch (error) {
-      res.status(500).json({
-        success: false,
-        message: "Failed to create review",
-      });
+      const data = await MentorReviewService.createReview(req.body);
+      res.status(201).json({ success: true, data });
+    } catch (error: any) {
+      res.status(500).json({ success: false, message: error.message || "Failed to create review" });
     }
   }
 
-  static async getByMentor(req: Request, res: Response) {
+  static async getAllByMentor(req: Request, res: Response) {
     try {
-      const mentorId = req.params.mentorId as string;
-
-      const reviews = await MentorReviewService.getReviewsByMentor(mentorId);
-
-      res.json({
-        success: true,
-        data: reviews,
-      });
-    } catch (error) {
-      res.status(500).json({
-        success: false,
-        message: "Failed to fetch mentor reviews",
-      });
+      // Cast to string to satisfy TypeScript
+      const mentorId = Array.isArray(req.params.mentorId) ? req.params.mentorId[0] : req.params.mentorId;
+      const data = await MentorReviewService.getReviewsByMentor(mentorId);
+      res.json({ success: true, data });
+    } catch (error: any) {
+      res.status(500).json({ success: false, message: error.message || "Failed to fetch reviews" });
     }
   }
 
-  static async getByStudent(req: Request, res: Response) {
+  static async getOne(req: Request, res: Response) {
     try {
-      const studentId = req.params.studentId as string;
-
-      const reviews = await MentorReviewService.getReviewsForStudent(studentId);
-
-      res.json({
-        success: true,
-        data: reviews,
-      });
-    } catch (error) {
-      res.status(500).json({
-        success: false,
-        message: "Failed to fetch student reviews",
-      });
+      const id = Array.isArray(req.params.id) ? req.params.id[0] : req.params.id;
+      const data = await MentorReviewService.getReviewById(id);
+      if (!data) return res.status(404).json({ success: false, message: "Review not found" });
+      res.json({ success: true, data });
+    } catch (error: any) {
+      res.status(500).json({ success: false, message: error.message || "Failed to fetch review" });
     }
   }
 }

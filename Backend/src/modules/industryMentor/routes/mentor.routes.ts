@@ -1,15 +1,21 @@
 import { Router } from "express";
 import MentorReviewController from "../controllers/mentorReview.controller";
+import authMiddleware from "../../../middleware/auth.middleware"; // optional
+import roleMiddleware from "../../../middleware/role.middleware"; // optional
 
 const router = Router();
 
+// Protect all routes if you want
+router.use(authMiddleware);
+router.use(roleMiddleware(["MENTOR"]));
+
 // Create review
-router.post("/review", MentorReviewController.create);
+router.post("/", MentorReviewController.create);
 
-// Get reviews by mentor
-router.get("/mentor/:mentorId", MentorReviewController.getByMentor);
+// Get all reviews by mentor
+router.get("/mentor/:mentorId", MentorReviewController.getAllByMentor);
 
-// Get reviews for student
-router.get("/student/:studentId", MentorReviewController.getByStudent);
+// Get review by ID
+router.get("/:id", MentorReviewController.getOne);
 
 export default router;

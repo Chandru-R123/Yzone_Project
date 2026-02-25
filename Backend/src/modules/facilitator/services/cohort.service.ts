@@ -1,14 +1,16 @@
-import { CohortRepository } from "../Repos/cohort.repository";
+// src/modules/facilitator/services/cohort.service.ts
+import CohortRepository from "../Repos/cohort.repo";
+import { Cohort } from "../types/cohort.types";
 
-export class CohortService {
+class CohortService {
 
-  private cohortRepo = new CohortRepository();
+  static async createCohort(data: Cohort) {
+    return await CohortRepository.create(data);
+  }
 
-  async createCohort(data: any) {
-    if (!data.name) {
-      throw new Error("Cohort name is required");
-    }
-
-    return await this.cohortRepo.createCohort(data);
+  static async getCohortsByTenant(tenantId: string) {
+    return await CohortRepository.getByTenant(tenantId);
   }
 }
+
+export default CohortService;
