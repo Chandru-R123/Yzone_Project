@@ -1,14 +1,18 @@
-import { ProjectsRepository } from "../Repos/projects.repo";
-import { CreateProjectInput } from "../types/project.types";
+import { Project } from "../types/project.types";
+import { ProjectsRepo } from "../repos/projects.repo";
+
+const repo = new ProjectsRepo();
 
 export class ProjectsService {
-  repo = new ProjectsRepository();
-
-  createProject(data: CreateProjectInput) {
-    return this.repo.createProject(data);
+  createProject(data: Project) {
+    return repo.createProject(data);
   }
 
-  listProjects(teamId: string) {
-    return this.repo.getProjectsByTeam(teamId);
+  getProjectsByCohort(cohortId: string) {
+    return repo.getProjectsByCohort(cohortId);
+  }
+
+  getProjectsByTeam(teamId: string) {
+    return repo.getProjectsByTeam(teamId);
   }
 }

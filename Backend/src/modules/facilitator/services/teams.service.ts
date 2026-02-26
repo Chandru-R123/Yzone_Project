@@ -1,14 +1,14 @@
-import { TeamsRepository } from "../Repos/teams.repo";
-import { CreateTeamInput } from "../types/teams.types";
+import { Team } from "../types/teams.types";
+import { TeamsRepo } from "../repos/teams.repo";
+
+const repo = new TeamsRepo();
 
 export class TeamsService {
-  repo = new TeamsRepository();
-
-  createTeam(data: CreateTeamInput) {
-    return this.repo.createTeam(data);
+  createTeam(data: Team) {
+    return repo.createTeam(data);
   }
 
-  listTeams(cohortId: string) {
-    return this.repo.getTeamsByCohort(cohortId);
+  getByCohort(cohortId: string) {
+    return repo.getTeamsByCohort(cohortId);
   }
 }

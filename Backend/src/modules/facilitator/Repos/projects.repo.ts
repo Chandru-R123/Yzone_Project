@@ -1,18 +1,30 @@
 import { pool } from "../../../config/db";
-import { CreateProjectInput } from "../types/project.types";
+import { Project } from "../types/project.types";
 
-export class ProjectsRepository {
-  createProject(data: CreateProjectInput) {
-    const query = `
-      INSERT INTO projects (cohort_id, team_id, type, title, status)
-      VALUES ($1, $2, $3, $4, $5)
-      RETURNING *;
-    `;
-    return pool.query(query, [data.cohortId, data.teamId, data.type, data.title, data.status || 'PENDING'])
-      .then(r => r.rows[0]);
+export class ProjectsRepo {
+  async createProject(data: Project) {
+    const { cohortId, teamId, type, title, status } = data;
+    const result = await pool.query(
+      `INSERT INTO projects (cohort_id, team_id, type, title, status)
+       VALUES ($1,$2,$3,$4,$5) RETURNING *`,
+      [cohortId, teamId, type, title, status || "PENDING"]
+    );
+    return result.rows[0];
   }
 
-  getProjectsByTeam(teamId: string) {
-    return pool.query(`SELECT * FROM projects WHERE team_id = $1`, [teamId]).then(r => r.rows);
+  async getProjectsByCohort(cohortId: string) {
+    const result = await pool.query(
+      `SELECT * FROM projects WHERE cohort_id = $1`,
+      [cohortId]
+    );
+    return result.rows;
+  }
+
+  async getProjectsByTeam(teamId: string) {
+    const result = await pool.query(
+      `SELECT * FROM projects WHERE team_id = $1`,
+      [teamId]
+    );
+    return result.rows;
   }
 }

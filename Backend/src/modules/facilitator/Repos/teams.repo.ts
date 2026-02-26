@@ -1,17 +1,21 @@
 import { pool } from "../../../config/db";
-import { CreateTeamInput } from "../types/teams.types";
+import { Team } from "../types/teams.types";
 
-export class TeamsRepository {
-  createTeam(data: CreateTeamInput) {
-    const query = `
-      INSERT INTO teams (cohort_id, name)
-      VALUES ($1, $2)
-      RETURNING *;
-    `;
-    return pool.query(query, [data.cohortId, data.name]).then(r => r.rows[0]);
+export class TeamsRepo {
+  async createTeam(data: Team) {
+    const { cohortId, name } = data;
+    const result = await pool.query(
+      `INSERT INTO teams (cohort_id, name) VALUES ($1,$2) RETURNING *`,
+      [cohortId, name]
+    );
+    return result.rows[0];
   }
 
-  getTeamsByCohort(cohortId: string) {
-    return pool.query(`SELECT * FROM teams WHERE cohort_id = $1`, [cohortId]).then(r => r.rows);
+  async getTeamsByCohort(cohortId: string) {
+    const result = await pool.query(
+      `SELECT * FROM teams WHERE cohort_id = $1`,
+      [cohortId]
+    );
+    return result.rows;
   }
 }

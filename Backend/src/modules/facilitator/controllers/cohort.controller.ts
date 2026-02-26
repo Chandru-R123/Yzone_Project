@@ -1,33 +1,36 @@
 // src/modules/facilitator/controllers/cohort.controller.ts
 import { Request, Response } from "express";
-import CohortService from "../services/cohort.service";
+import { CohortService } from "../services/cohort.service";
 
-class CohortController {
+const service = new CohortService();
 
+export class CohortController {
   static async create(req: Request, res: Response) {
     try {
-      const data = await CohortService.createCohort(req.body);
-      res.status(201).json({ success: true, data });
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ success: false, message: "Failed to create cohort" });
+      const cohort = await service.createCohort(req.body);
+      res.status(201).json({ success: true, data: cohort });
+    } catch (err: any) {
+      res.status(500).json({ success: false, message: err.message });
     }
   }
 
   static async getByTenant(req: Request, res: Response) {
     try {
-      const { tenantId } = req.params;
-      if (!tenantId || Array.isArray(tenantId)) {
-        return res.status(400).json({ success: false, message: "Invalid tenant ID" });
-      }
+      const tenantId = req.params.tenantId as string; // cast to string
+      const cohorts = await service.getByTenant(tenantId);
+      res.status(200).json({ success: true, data: cohorts });
+    } catch (err: any) {
+      res.status(500).json({ success: false, message: err.message });
+    }
+  }
 
-      const data = await CohortService.getCohortsByTenant(tenantId);
-      res.json({ success: true, data });
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ success: false, message: "Failed to fetch cohorts" });
+  // ✅ Add this static method
+  static async getAll(req: Request, res: Response) {
+    try {
+      const cohorts = await service.getAllCohorts();
+      res.status(200).json({ success: true, data: cohorts });
+    } catch (err: any) {
+      res.status(500).json({ success: false, message: err.message });
     }
   }
 }
-
-export default CohortController;
