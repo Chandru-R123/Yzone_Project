@@ -9,10 +9,11 @@ import {
   Clock,
   LogOut,
   Plus,
-  UserCheck,
+UserCheck,
   LayoutDashboard,
   UserPlus,
   UsersRound
+
 } from 'lucide-react';
 import { dashboardService } from '../../services/dashboard.service';
 import { useAuth } from '../../context/AuthContext';
@@ -23,16 +24,21 @@ import AttendanceForm from '../../components/facilitator/AttendanceForm';
 import StudentForm from '../../components/facilitator/StudentForm';
 import MentorForm from '../../components/facilitator/MentorForm';
 
+
 export default function FacilitatorDashboard() {
+<<<<<<< HEAD
   const { logout, currentUser } = useAuth();
+=======
+>>>>>>> fc3343ab3028ed5b8ad61139e1b2f12b76ff80eb
   const navigate = useNavigate();
-  const [dashboardData, setDashboardData] = useState<any>(null);
+  const { currentUser, logout } = useAuth();
   const [loading, setLoading] = useState(true);
+  const [dashboardData, setDashboardData] = useState<any>(null);
   const [showCohortForm, setShowCohortForm] = useState(false);
   const [showTeamForm, setShowTeamForm] = useState(false);
   const [showProjectForm, setShowProjectForm] = useState(false);
   const [showAttendanceForm, setShowAttendanceForm] = useState(false);
-  const [showStudentForm, setShowStudentForm] = useState(false);
+const [showStudentForm, setShowStudentForm] = useState(false);
   const [showMentorForm, setShowMentorForm] = useState(false);
   const [activeTab, setActiveTab] = useState('dashboard');
   const [students, setStudents] = useState<any[]>([]);
@@ -50,6 +56,7 @@ export default function FacilitatorDashboard() {
     }
   }, [activeTab]);
 
+
   const loadDashboard = async () => {
     try {
       setLoading(true);
@@ -62,10 +69,26 @@ export default function FacilitatorDashboard() {
     }
   };
 
+<<<<<<< HEAD
   const loadStudents = async () => {
     try {
       const data = await dashboardService.getFacilitatorStudents();
       setStudents(data);
+=======
+const loadStudents = async () => {
+    try {
+      const token = localStorage.getItem('token');
+      const cohortId = dashboardData?.cohorts?.[0]?.id;
+      if (!cohortId) return;
+
+      const response = await fetch(`http://localhost:5000/api/facilitator/students/${cohortId}`, {
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+      const data = await response.json();
+      if (data.success) {
+        setStudents(data.data);
+      }
+>>>>>>> fc3343ab3028ed5b8ad61139e1b2f12b76ff80eb
     } catch (error) {
       console.error('Failed to load students:', error);
     }
@@ -73,8 +96,22 @@ export default function FacilitatorDashboard() {
 
   const loadTeams = async () => {
     try {
+<<<<<<< HEAD
       const data = await dashboardService.getFacilitatorTeams();
       setTeams(data);
+=======
+      const token = localStorage.getItem('token');
+      const cohortId = dashboardData?.cohorts?.[0]?.id;
+      if (!cohortId) return;
+
+      const response = await fetch(`http://localhost:5000/api/facilitator/teams/${cohortId}`, {
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+      const data = await response.json();
+      if (data.success) {
+        setTeams(data.data);
+      }
+>>>>>>> fc3343ab3028ed5b8ad61139e1b2f12b76ff80eb
     } catch (error) {
       console.error('Failed to load teams:', error);
     }
@@ -82,21 +119,54 @@ export default function FacilitatorDashboard() {
 
   const loadMentors = async () => {
     try {
+<<<<<<< HEAD
       const data = await dashboardService.getFacilitatorMentors();
       setMentors(data);
+=======
+      const token = localStorage.getItem('token');
+      const response = await fetch('http://localhost:5000/api/facilitator/mentors', {
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+      const data = await response.json();
+      if (data.success) {
+        setMentors(data.data);
+      }
+>>>>>>> fc3343ab3028ed5b8ad61139e1b2f12b76ff80eb
     } catch (error) {
       console.error('Failed to load mentors:', error);
     }
   };
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> fc3343ab3028ed5b8ad61139e1b2f12b76ff80eb
   const handleLogout = () => {
     logout();
     navigate('/login');
   };
 
+<<<<<<< HEAD
   const stats = dashboardData?.stats || {};
   const cohorts = dashboardData?.cohorts || [];
   const dashboardStudents = dashboardData?.students || [];
+=======
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
+          <p className="mt-4 text-gray-600">Loading dashboard...</p>
+        </div>
+      </div>
+    );
+  }
+
+  const stats = dashboardData?.stats || {};
+  const cohorts = dashboardData?.cohorts || [];
+const dashboardStudents = dashboardData?.students || [];
+
+>>>>>>> fc3343ab3028ed5b8ad61139e1b2f12b76ff80eb
   const trackerStatus = dashboardData?.trackerStatus || [];
 
   return (
@@ -110,7 +180,7 @@ export default function FacilitatorDashboard() {
               <p className="text-sm text-gray-600 mt-1">Welcome back, {currentUser?.name}</p>
             </div>
             <div className="flex items-center gap-3">
-              {activeTab === 'students' && (
+{activeTab === 'students' && (
                 <button
                   onClick={() => setShowStudentForm(true)}
                   className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 flex items-center gap-2"
@@ -155,6 +225,7 @@ export default function FacilitatorDashboard() {
                   </button>
                 </>
               )}
+
               <button
                 onClick={handleLogout}
                 className="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 flex items-center gap-2"
@@ -164,12 +235,69 @@ export default function FacilitatorDashboard() {
               </button>
             </div>
           </div>
+<<<<<<< HEAD
+=======
+{/* Navigation Tabs */}
+          <div className="mt-4 border-b border-gray-200">
+            <nav className="-mb-px flex space-x-8">
+              <button
+                onClick={() => setActiveTab('dashboard')}
+                className={`py-2 px-1 border-b-2 font-medium text-sm ${
+                  activeTab === 'dashboard'
+                    ? 'border-blue-500 text-blue-600'
+                    : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                }`}
+              >
+                <LayoutDashboard className="w-4 h-4 inline mr-2" />
+                Dashboard
+              </button>
+              <button
+                onClick={() => setActiveTab('students')}
+                className={`py-2 px-1 border-b-2 font-medium text-sm ${
+                  activeTab === 'students'
+                    ? 'border-blue-500 text-blue-600'
+                    : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                }`}
+              >
+                <Users className="w-4 h-4 inline mr-2" />
+                Students
+              </button>
+              <button
+                onClick={() => setActiveTab('teams')}
+                className={`py-2 px-1 border-b-2 font-medium text-sm ${
+                  activeTab === 'teams'
+                    ? 'border-blue-500 text-blue-600'
+                    : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                }`}
+              >
+                <UsersRound className="w-4 h-4 inline mr-2" />
+                Teams
+              </button>
+              <button
+                onClick={() => setActiveTab('mentors')}
+                className={`py-2 px-1 border-b-2 font-medium text-sm ${
+                  activeTab === 'mentors'
+                    ? 'border-blue-500 text-blue-600'
+                    : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                }`}
+              >
+                <GraduationCap className="w-4 h-4 inline mr-2" />
+                Mentors
+              </button>
+            </nav>
+          </div>
+
+>>>>>>> fc3343ab3028ed5b8ad61139e1b2f12b76ff80eb
         </div>
       </header>
 
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+<<<<<<< HEAD
         {activeTab === 'dashboard' && (
+=======
+{activeTab === 'dashboard' && (
+>>>>>>> fc3343ab3028ed5b8ad61139e1b2f12b76ff80eb
           <>
             {/* Assigned Cohorts */}
             {cohorts.length > 0 && (
@@ -329,11 +457,12 @@ export default function FacilitatorDashboard() {
                   No students found. Click "Add Student" to create one.
                 </div>
               )}
+
             </div>
           </div>
         )}
 
-        {activeTab === 'teams' && (
+{activeTab === 'teams' && (
           <div className="bg-white rounded-lg shadow-sm p-6">
             <div className="flex items-center justify-between mb-6">
               <h3 className="text-lg font-semibold text-gray-900">Team Management</h3>
@@ -416,6 +545,7 @@ export default function FacilitatorDashboard() {
             </div>
           </div>
         )}
+
       </main>
 
       {/* Modals */}
@@ -428,10 +558,11 @@ export default function FacilitatorDashboard() {
       {showTeamForm && (
         <TeamForm
           onClose={() => setShowTeamForm(false)}
-          onSuccess={() => {
+onSuccess={() => {
             loadDashboard();
             loadTeams();
           }}
+
         />
       )}
       {showProjectForm && (
@@ -446,7 +577,7 @@ export default function FacilitatorDashboard() {
           onSuccess={loadDashboard}
         />
       )}
-      {showStudentForm && (
+{showStudentForm && (
         <StudentForm
           onClose={() => setShowStudentForm(false)}
           onSuccess={() => {
@@ -464,6 +595,7 @@ export default function FacilitatorDashboard() {
           }}
         />
       )}
+
     </div>
   );
 }

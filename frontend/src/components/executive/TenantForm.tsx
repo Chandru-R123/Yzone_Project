@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { X, Upload } from 'lucide-react';
 
+
 interface TenantFormProps {
   onClose: () => void;
   onSuccess: () => void;
@@ -14,9 +15,10 @@ export default function TenantForm({ onClose, onSuccess }: TenantFormProps) {
     contactPhone: '',
     address: '',
   });
-  const [mouFile, setMouFile] = useState<File | null>(null);
+const [mouFile, setMouFile] = useState<File | null>(null);
   const [mouTitle, setMouTitle] = useState('');
   const [mouDescription, setMouDescription] = useState('');
+
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
@@ -27,9 +29,9 @@ export default function TenantForm({ onClose, onSuccess }: TenantFormProps) {
 
     try {
       const token = localStorage.getItem('token');
-      
-      // First create the tenant
+// First create the tenant
       const tenantResponse = await fetch('http://localhost:5000/api/executive/tenants', {
+
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -38,7 +40,7 @@ export default function TenantForm({ onClose, onSuccess }: TenantFormProps) {
         body: JSON.stringify(formData),
       });
 
-      const tenantData = await tenantResponse.json();
+const tenantData = await tenantResponse.json();
 
       if (!tenantResponse.ok) {
         setError(tenantData.message || 'Failed to create tenant');
@@ -70,6 +72,7 @@ export default function TenantForm({ onClose, onSuccess }: TenantFormProps) {
 
       onSuccess();
       onClose();
+
     } catch (err: any) {
       setError(err.message || 'Failed to create tenant');
     } finally {
@@ -79,7 +82,8 @@ export default function TenantForm({ onClose, onSuccess }: TenantFormProps) {
 
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+<div className="bg-white rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+
         <div className="flex items-center justify-between p-6 border-b">
           <h2 className="text-xl font-bold text-gray-900">Create New Tenant</h2>
           <button onClick={onClose} className="text-gray-400 hover:text-gray-600">
@@ -87,77 +91,15 @@ export default function TenantForm({ onClose, onSuccess }: TenantFormProps) {
           </button>
         </div>
 
-        <form onSubmit={handleSubmit} className="p-6 space-y-6">
+<form onSubmit={handleSubmit} className="p-6 space-y-6">
+
           {error && (
             <div className="p-3 bg-red-50 border border-red-200 rounded-lg text-red-700 text-sm">
               {error}
             </div>
           )}
 
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Institution Name *
-            </label>
-            <input
-              type="text"
-              required
-              value={formData.name}
-              onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            />
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Institution Code *
-            </label>
-            <input
-              type="text"
-              required
-              value={formData.institutionCode}
-              onChange={(e) => setFormData({ ...formData, institutionCode: e.target.value })}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            />
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Contact Email *
-            </label>
-            <input
-              type="email"
-              required
-              value={formData.contactEmail}
-              onChange={(e) => setFormData({ ...formData, contactEmail: e.target.value })}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            />
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Contact Phone
-            </label>
-            <input
-              type="tel"
-              value={formData.contactPhone}
-              onChange={(e) => setFormData({ ...formData, contactPhone: e.target.value })}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            />
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Address
-            </label>
-            <textarea
-              value={formData.address}
-              onChange={(e) => setFormData({ ...formData, address: e.target.value })}
-              rows={3}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            />
-          </div>
-
-          {/* Tenant Information */}
+{/* Tenant Information */}
           <div className="space-y-4">
             <h3 className="text-lg font-semibold text-gray-900">Tenant Information</h3>
             
@@ -274,6 +216,7 @@ export default function TenantForm({ onClose, onSuccess }: TenantFormProps) {
                 </p>
               )}
             </div>
+
           </div>
 
           <div className="flex gap-3 pt-4">

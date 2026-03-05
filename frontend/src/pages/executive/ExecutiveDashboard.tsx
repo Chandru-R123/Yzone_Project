@@ -9,8 +9,9 @@ import {
   Activity,
   UserPlus,
   LogOut,
-  Plus,
+Plus,
   FileText
+
 } from 'lucide-react';
 import { dashboardService } from '../../services/dashboard.service';
 import { useAuth } from '../../context/AuthContext';
@@ -18,14 +19,20 @@ import TenantForm from '../../components/executive/TenantForm';
 import CohortForm from '../../components/executive/CohortForm';
 import { MOUUpload } from '../../components/executive/MOUUpload';
 
+
 export default function ExecutiveDashboard() {
+<<<<<<< HEAD
   const { logout, currentUser } = useAuth();
+=======
+>>>>>>> fc3343ab3028ed5b8ad61139e1b2f12b76ff80eb
   const navigate = useNavigate();
-  const [dashboardData, setDashboardData] = useState<any>(null);
+  const { currentUser, logout } = useAuth();
   const [loading, setLoading] = useState(true);
+  const [dashboardData, setDashboardData] = useState<any>(null);
   const [showTenantForm, setShowTenantForm] = useState(false);
   const [showCohortForm, setShowCohortForm] = useState(false);
-  const [activeTab, setActiveTab] = useState('dashboard');
+const [activeTab, setActiveTab] = useState('dashboard');
+
 
   useEffect(() => {
     loadDashboard();
@@ -34,6 +41,8 @@ export default function ExecutiveDashboard() {
   const loadDashboard = async () => {
     try {
       setLoading(true);
+      // Add a small delay to ensure database transaction completes
+      await new Promise(resolve => setTimeout(resolve, 100));
       const data = await dashboardService.getExecutiveDashboard();
       setDashboardData(data);
     } catch (error) {
@@ -102,12 +111,47 @@ export default function ExecutiveDashboard() {
               </button>
             </div>
           </div>
+<<<<<<< HEAD
+=======
+{/* Navigation Tabs */}
+          <div className="mt-4 border-b border-gray-200">
+            <nav className="-mb-px flex space-x-8">
+              <button
+                onClick={() => setActiveTab('dashboard')}
+                className={`py-2 px-1 border-b-2 font-medium text-sm ${
+                  activeTab === 'dashboard'
+                    ? 'border-blue-500 text-blue-600'
+                    : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                }`}
+              >
+                <LayoutDashboard className="w-4 h-4 inline mr-2" />
+                Dashboard
+              </button>
+              <button
+                onClick={() => setActiveTab('mou')}
+                className={`py-2 px-1 border-b-2 font-medium text-sm ${
+                  activeTab === 'mou'
+                    ? 'border-blue-500 text-blue-600'
+                    : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                }`}
+              >
+                <FileText className="w-4 h-4 inline mr-2" />
+                MOU Management
+              </button>
+            </nav>
+          </div>
+
+>>>>>>> fc3343ab3028ed5b8ad61139e1b2f12b76ff80eb
         </div>
       </header>
 
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+<<<<<<< HEAD
         {activeTab === 'dashboard' && (
+=======
+{activeTab === 'dashboard' && (
+>>>>>>> fc3343ab3028ed5b8ad61139e1b2f12b76ff80eb
           <>
             {/* Stats Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
@@ -241,6 +285,7 @@ export default function ExecutiveDashboard() {
         )}
 
         {activeTab === 'mou' && <MOUUpload />}
+
       </main>
 
       {/* Modals */}

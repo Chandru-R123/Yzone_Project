@@ -9,13 +9,15 @@ interface TeamFormProps {
 export default function TeamForm({ onClose, onSuccess }: TeamFormProps) {
   const [cohorts, setCohorts] = useState<any[]>([]);
   const [students, setStudents] = useState<any[]>([]);
-  const [mentors, setMentors] = useState<any[]>([]);
+const [mentors, setMentors] = useState<any[]>([]);
+
   const [formData, setFormData] = useState({
     cohortId: '',
     name: '',
     description: '',
     maxMembers: 5,
-    mentorId: '',
+mentorId: '',
+
   });
   const [selectedStudents, setSelectedStudents] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
@@ -23,7 +25,8 @@ export default function TeamForm({ onClose, onSuccess }: TeamFormProps) {
 
   useEffect(() => {
     loadCohorts();
-    loadMentors();
+loadMentors();
+
   }, []);
 
   useEffect(() => {
@@ -58,7 +61,7 @@ export default function TeamForm({ onClose, onSuccess }: TeamFormProps) {
     }
   };
 
-  const loadMentors = async () => {
+const loadMentors = async () => {
     try {
       const token = localStorage.getItem('token');
       const response = await fetch('http://localhost:5000/api/facilitator/mentors', {
@@ -70,6 +73,7 @@ export default function TeamForm({ onClose, onSuccess }: TeamFormProps) {
       console.error('Failed to load mentors:', err);
     }
   };
+
 
   const handleStudentToggle = (studentId: string) => {
     setSelectedStudents(prev => 
@@ -190,7 +194,7 @@ export default function TeamForm({ onClose, onSuccess }: TeamFormProps) {
             />
           </div>
 
-          <div>
+<div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
               Assign Mentor *
             </label>
@@ -211,6 +215,7 @@ export default function TeamForm({ onClose, onSuccess }: TeamFormProps) {
               The mentor will guide and review this team's progress
             </p>
           </div>
+
 
           {students.length > 0 && (
             <div>
