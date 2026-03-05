@@ -1,9 +1,6 @@
 import React, { useState } from 'react';
-<<<<<<< HEAD
 import { X } from 'lucide-react';
-=======
 import { X, Upload } from 'lucide-react';
->>>>>>> e25b0f6 (hi)
 
 interface TenantFormProps {
   onClose: () => void;
@@ -18,12 +15,9 @@ export default function TenantForm({ onClose, onSuccess }: TenantFormProps) {
     contactPhone: '',
     address: '',
   });
-<<<<<<< HEAD
-=======
   const [mouFile, setMouFile] = useState<File | null>(null);
   const [mouTitle, setMouTitle] = useState('');
   const [mouDescription, setMouDescription] = useState('');
->>>>>>> e25b0f6 (hi)
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
@@ -34,13 +28,10 @@ export default function TenantForm({ onClose, onSuccess }: TenantFormProps) {
 
     try {
       const token = localStorage.getItem('token');
-<<<<<<< HEAD
       const response = await fetch('http://localhost:5000/api/executive/tenants', {
-=======
       
       // First create the tenant
       const tenantResponse = await fetch('http://localhost:5000/api/executive/tenants', {
->>>>>>> e25b0f6 (hi)
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -49,7 +40,6 @@ export default function TenantForm({ onClose, onSuccess }: TenantFormProps) {
         body: JSON.stringify(formData),
       });
 
-<<<<<<< HEAD
       const data = await response.json();
 
       if (response.ok) {
@@ -58,7 +48,6 @@ export default function TenantForm({ onClose, onSuccess }: TenantFormProps) {
       } else {
         setError(data.message || 'Failed to create tenant');
       }
-=======
       const tenantData = await tenantResponse.json();
 
       if (!tenantResponse.ok) {
@@ -91,7 +80,6 @@ export default function TenantForm({ onClose, onSuccess }: TenantFormProps) {
 
       onSuccess();
       onClose();
->>>>>>> e25b0f6 (hi)
     } catch (err: any) {
       setError(err.message || 'Failed to create tenant');
     } finally {
@@ -101,11 +89,8 @@ export default function TenantForm({ onClose, onSuccess }: TenantFormProps) {
 
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-<<<<<<< HEAD
       <div className="bg-white rounded-lg shadow-xl max-w-md w-full max-h-[90vh] overflow-y-auto">
-=======
       <div className="bg-white rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
->>>>>>> e25b0f6 (hi)
         <div className="flex items-center justify-between p-6 border-b">
           <h2 className="text-xl font-bold text-gray-900">Create New Tenant</h2>
           <button onClick={onClose} className="text-gray-400 hover:text-gray-600">
@@ -113,18 +98,14 @@ export default function TenantForm({ onClose, onSuccess }: TenantFormProps) {
           </button>
         </div>
 
-<<<<<<< HEAD
         <form onSubmit={handleSubmit} className="p-6 space-y-4">
-=======
         <form onSubmit={handleSubmit} className="p-6 space-y-6">
->>>>>>> e25b0f6 (hi)
           {error && (
             <div className="p-3 bg-red-50 border border-red-200 rounded-lg text-red-700 text-sm">
               {error}
             </div>
           )}
 
-<<<<<<< HEAD
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
               Institution Name *
@@ -186,7 +167,6 @@ export default function TenantForm({ onClose, onSuccess }: TenantFormProps) {
               rows={3}
               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             />
-=======
           {/* Tenant Information */}
           <div className="space-y-4">
             <h3 className="text-lg font-semibold text-gray-900">Tenant Information</h3>
@@ -304,7 +284,6 @@ export default function TenantForm({ onClose, onSuccess }: TenantFormProps) {
                 </p>
               )}
             </div>
->>>>>>> e25b0f6 (hi)
           </div>
 
           <div className="flex gap-3 pt-4">

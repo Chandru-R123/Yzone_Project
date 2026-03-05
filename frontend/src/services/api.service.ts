@@ -24,13 +24,8 @@ class ApiService {
       headers: {
         'Content-Type': 'application/json',
         ...getAuthHeader(),
-<<<<<<< HEAD
-        ...options.headers,
-      },
-=======
         ...(options.headers as Record<string, string>),
       } as HeadersInit,
->>>>>>> e25b0f6 (hi)
     };
 
     try {
@@ -87,11 +82,7 @@ class ApiService {
         method: 'POST',
         headers: {
           ...getAuthHeader(),
-<<<<<<< HEAD
-        },
-=======
         } as HeadersInit,
->>>>>>> e25b0f6 (hi)
         body: formData,
       });
 

@@ -49,11 +49,8 @@ export default function UserManagement() {
     try {
       setLoading(true);
       const data = await userService.getAllUsers();
-<<<<<<< HEAD
       setUsers(data);
-=======
       setUsers(data as User[]);
->>>>>>> e25b0f6 (hi)
     } catch (error) {
       console.error('Failed to load users:', error);
     } finally {
@@ -64,11 +61,8 @@ export default function UserManagement() {
   const loadTenants = async () => {
     try {
       const data = await dashboardService.getTenants();
-<<<<<<< HEAD
       setTenants(data);
-=======
       setTenants(data as any[]);
->>>>>>> e25b0f6 (hi)
     } catch (error) {
       console.error('Failed to load tenants:', error);
     }
@@ -77,11 +71,8 @@ export default function UserManagement() {
   const loadCohorts = async (tenantId: string) => {
     try {
       const data = await dashboardService.getCohorts(tenantId);
-<<<<<<< HEAD
       setCohorts(data);
-=======
       setCohorts(data as any[]);
->>>>>>> e25b0f6 (hi)
     } catch (error) {
       console.error('Failed to load cohorts:', error);
     }

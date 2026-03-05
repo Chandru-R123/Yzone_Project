@@ -7,23 +7,17 @@ import {
   Trophy,
   Calendar,
   LogOut,
-<<<<<<< HEAD
   Plus
-=======
   Plus,
   LayoutDashboard,
   CheckCircle,
   Edit3
->>>>>>> e25b0f6 (hi)
 } from 'lucide-react';
 import { dashboardService } from '../../services/dashboard.service';
 import { useAuth } from '../../context/AuthContext';
 import TrackerForm from '../../components/student/TrackerForm';
-<<<<<<< HEAD
-=======
 import { AttendanceView } from '../../components/student/AttendanceView';
 import { TrackerModification } from '../../components/student/TrackerModification';
->>>>>>> e25b0f6 (hi)
 
 export default function StudentDashboard() {
   const navigate = useNavigate();
@@ -31,10 +25,7 @@ export default function StudentDashboard() {
   const [loading, setLoading] = useState(true);
   const [dashboardData, setDashboardData] = useState<any>(null);
   const [showTrackerForm, setShowTrackerForm] = useState(false);
-<<<<<<< HEAD
-=======
   const [activeTab, setActiveTab] = useState('dashboard');
->>>>>>> e25b0f6 (hi)
 
   useEffect(() => {
     loadDashboard();
@@ -102,8 +93,6 @@ export default function StudentDashboard() {
               </button>
             </div>
           </div>
-<<<<<<< HEAD
-=======
           
           {/* Navigation Tabs */}
           <div className="mt-4 border-b border-gray-200">
@@ -143,13 +132,11 @@ export default function StudentDashboard() {
               </button>
             </nav>
           </div>
->>>>>>> e25b0f6 (hi)
         </div>
       </header>
 
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-<<<<<<< HEAD
         {/* Stats Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           <StatCard
@@ -277,7 +264,6 @@ export default function StudentDashboard() {
             </div>
           </div>
         </div>
-=======
         {activeTab === 'dashboard' && (
           <>
             {/* Stats Grid */}
@@ -412,7 +398,6 @@ export default function StudentDashboard() {
 
         {activeTab === 'attendance' && <AttendanceView />}
         {activeTab === 'tracker-edit' && <TrackerModification />}
->>>>>>> e25b0f6 (hi)
       </main>
 
       {/* Modals */}

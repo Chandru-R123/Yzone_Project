@@ -9,19 +9,13 @@ interface TeamFormProps {
 export default function TeamForm({ onClose, onSuccess }: TeamFormProps) {
   const [cohorts, setCohorts] = useState<any[]>([]);
   const [students, setStudents] = useState<any[]>([]);
-<<<<<<< HEAD
-=======
   const [mentors, setMentors] = useState<any[]>([]);
->>>>>>> e25b0f6 (hi)
   const [formData, setFormData] = useState({
     cohortId: '',
     name: '',
     description: '',
     maxMembers: 5,
-<<<<<<< HEAD
-=======
     mentorId: '',
->>>>>>> e25b0f6 (hi)
   });
   const [selectedStudents, setSelectedStudents] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
@@ -29,10 +23,7 @@ export default function TeamForm({ onClose, onSuccess }: TeamFormProps) {
 
   useEffect(() => {
     loadCohorts();
-<<<<<<< HEAD
-=======
     loadMentors();
->>>>>>> e25b0f6 (hi)
   }, []);
 
   useEffect(() => {
@@ -67,8 +58,6 @@ export default function TeamForm({ onClose, onSuccess }: TeamFormProps) {
     }
   };
 
-<<<<<<< HEAD
-=======
   const loadMentors = async () => {
     try {
       const token = localStorage.getItem('token');
@@ -82,7 +71,6 @@ export default function TeamForm({ onClose, onSuccess }: TeamFormProps) {
     }
   };
 
->>>>>>> e25b0f6 (hi)
   const handleStudentToggle = (studentId: string) => {
     setSelectedStudents(prev => 
       prev.includes(studentId) 
@@ -202,8 +190,6 @@ export default function TeamForm({ onClose, onSuccess }: TeamFormProps) {
             />
           </div>
 
-<<<<<<< HEAD
-=======
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
               Assign Mentor *
@@ -226,7 +212,6 @@ export default function TeamForm({ onClose, onSuccess }: TeamFormProps) {
             </p>
           </div>
 
->>>>>>> e25b0f6 (hi)
           {students.length > 0 && (
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
